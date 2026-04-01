@@ -1,25 +1,30 @@
 let countriesData = [];
 
-// Fetch API data
-fetch("https://restcountries.com/v3.1/all")
-  .then(res => res.json())
+// FETCH DATA (correct API)
+fetch("https://restcountries.com/v3.1/all?fields=name,flags,capital,population,region")
+  .then(res => {
+    if (!res.ok) throw new Error("API error");
+    return res.json();
+  })
   .then(data => {
     countriesData = data;
     displayCountries(data);
-  });
+  })
+  .catch(err => console.log(err));
 
-// Display countries
+// DISPLAY COUNTRIES
 function displayCountries(data) {
   const container = document.getElementById("countriesContainer");
   container.innerHTML = "";
 
-  data.map(country => {
+  data.forEach(country => {
     const div = document.createElement("div");
 
     div.style.border = "1px solid black";
     div.style.margin = "10px";
     div.style.padding = "10px";
     div.style.display = "inline-block";
+    div.style.width = "200px";
 
     div.innerHTML = `
       <h3>${country.name.common}</h3>
@@ -33,7 +38,7 @@ function displayCountries(data) {
   });
 }
 
-// Search functionality
+// SEARCH FUNCTION
 document.getElementById("searchInput").addEventListener("input", function () {
   const searchValue = this.value.toLowerCase();
 
