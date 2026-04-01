@@ -1,0 +1,100 @@
+/* BODY */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  color: #fff;
+}
+
+/* TITLE */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* SEARCH */
+#searchInput {
+  display: block;
+  margin: 20px auto;
+  padding: 12px;
+  width: 320px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  background: #ffffff;
+  color: #333;
+}
+
+/* CONTAINER */
+#countriesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border-radius: 18px;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* HOVER EFFECT */
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+/* FLAG */
+.card img {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.card h3 {
+  margin: 10px 0;
+  color: #1e3c72;
+}
+
+/* TEXT */
+.card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* ACCENT LINE */
+.card::before {
+  content: "";
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  color: #ddd;
+}

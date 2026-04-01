@@ -1,36 +1,36 @@
 let countriesData = [];
 
-// FETCH DATA (correct API)
 fetch("https://restcountries.com/v3.1/all?fields=name,flags,capital,population,region")
-  .then(res => {
-    if (!res.ok) throw new Error("API error");
-    return res.json();
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("API Error");
+    }
+    return response.json();
   })
   .then(data => {
+    console.log(data); // DEBUG
     countriesData = data;
     displayCountries(data);
   })
-  .catch(err => console.log(err));
+  .catch(error => {
+    console.log("Error fetching data:", error);
+  });
 
-// DISPLAY COUNTRIES
 function displayCountries(data) {
   const container = document.getElementById("countriesContainer");
   container.innerHTML = "";
 
+  if (!Array.isArray(data)) return;
+
   data.forEach(country => {
     const div = document.createElement("div");
-
-    div.style.border = "1px solid black";
-    div.style.margin = "10px";
-    div.style.padding = "10px";
-    div.style.display = "inline-block";
-    div.style.width = "200px";
+    div.className = "card";
 
     div.innerHTML = `
       <h3>${country.name.common}</h3>
-      <img src="${country.flags.png}" width="100"/>
+      <img src="${country.flags.png}" alt="flag" />
       <p><b>Capital:</b> ${country.capital ? country.capital[0] : "N/A"}</p>
-      <p><b>Population:</b> ${country.population}</p>
+      <p><b>Population:</b> ${country.population.toLocaleString()}</p>
       <p><b>Region:</b> ${country.region}</p>
     `;
 
@@ -38,9 +38,10 @@ function displayCountries(data) {
   });
 }
 
-// SEARCH FUNCTION
 document.getElementById("searchInput").addEventListener("input", function () {
   const searchValue = this.value.toLowerCase();
+
+  if (!Array.isArray(countriesData)) return;
 
   const filteredCountries = countriesData.filter(country =>
     country.name.common.toLowerCase().includes(searchValue)
