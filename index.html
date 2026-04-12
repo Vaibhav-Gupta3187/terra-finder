@@ -7,16 +7,39 @@
   <!-- LINK CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
-<footer>
-  Made by Vaibhav 🌍 | Country Explorer Project
-</footer>
 <body>
 
   <h1>🌍 Country Explorer</h1>
 
-  <input type="text" id="searchInput" placeholder="Search country..." />
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search country..." />
+    <select id="alphabetFilter">
+      <option value="all">All Letters</option>
+    </select>
+  </div>
 
   <div id="countriesContainer"></div>
+
+  <!-- Detailed Country Modal -->
+  <div id="countryModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModalBtn" class="close-btn">&times;</button>
+      <div class="modal-split">
+        <!-- Left: Map -->
+        <div id="mapContainer"></div>
+        <!-- Right: Stats -->
+        <div class="modal-details">
+          <h2 id="modalCountryName">Country Name</h2>
+          <input type="text" id="statsSearchInput" placeholder="Search stats..." />
+          <div id="countryStatsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Made by Vaibhav 🌍 | Country Explorer Project
+  </footer>
 
   <script src="script.js"></script>
 </body>
