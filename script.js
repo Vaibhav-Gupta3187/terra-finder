@@ -1,5 +1,6 @@
 let countriesData = [];
 let svgLoaded = false;
+const loadingIndicator = document.getElementById("loadingIndicator");
 
 // Fetch countries data
 fetch("https://restcountries.com/v3.1/all?fields=name,flags,capital,population,region,cca2,cca3,altSpellings")
@@ -11,10 +12,12 @@ fetch("https://restcountries.com/v3.1/all?fields=name,flags,capital,population,r
   })
   .then(data => {
     countriesData = data;
+    loadingIndicator.classList.add("hidden");
     displayCountries(data);
   })
   .catch(error => {
     console.log("Error fetching data:", error);
+    loadingIndicator.textContent = "Error loading data.";
   });
 
 // Fetch SVG world map
@@ -97,7 +100,18 @@ function applyFilters() {
   displayCountries(filteredCountries);
 }
 
-searchInput.addEventListener("input", applyFilters);
+// Bonus Feature: Debounce function to optimize search filtering
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, delay);
+  };
+}
+
+const debouncedApplyFilters = debounce(applyFilters, 300);
+
+searchInput.addEventListener("input", debouncedApplyFilters);
 alphabetFilter.addEventListener("change", applyFilters);
 
 // --- Modal Logic ---
